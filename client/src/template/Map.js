@@ -133,8 +133,39 @@ const [markers, setMarkers] = useState([]);
         </div>
     )
 
-
 //locate parkings
+
+function Locate({ panTo }) {
+    return <button className="locate" onClick={() => {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+
+           
+            
+            fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=${env.GOOGLE_MAPS_API_KEY}`).then((response) => {
+                
+            if (response.ok) {
+                response.json().then((data) => {
+                    const zip = data.results[0].address_components[6].long_name
+                    setZipcode(zip);
+                    refetch({zipcode: zip})
+                });
+
+                panTo({
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude,
+                });
+            }
+            
+            
+            })
+        }, () => null)
+    }} 
+    >
+        <img src="/arrow.svg" alt="compass - locate me"/>
+    </button>
+    
+}
 
 //search a oarking
 
