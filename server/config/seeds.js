@@ -1,18 +1,18 @@
 const db = require('./connection');
-const { User, Park, Review } = require('../models');
+const { User, Parking, Review } = require('../models');
 
 db.once('open', async () => {
        
-    await Park.deleteMany();
+    await Parking.deleteMany();
 
-    const parks = await Park.insertMany([
+    const parkings = await Parking.insertMany([
         {zipcode: 'k1v-8v7', address: '2851-baycrest-dr ottawa', coordinates: '-45.378712X-75.650355', lat:'-45.378712', lng: '-75.650355' },
         {zipcode: 'K1P 5H9', address: '275 Slater Street, Ottawa ON ', coordinates: '45.41872X-75.70159', lat: '45.41872', lng: '-75.70159'},
         {zipcode: 'K1H 8K7', address: '1355 Bank Street, Ottawa, ON ', coordinates: '45.38796X-75.67521' , lat: '45.38796', lng: '-75.67521'},
         {zipcode: 'k1v-8v7', address: "2851-baycrest-dr ottawa", coordinates: '-45.378712X-75.650355', lat: '-45.378712', lng: '-75.650355'}
     ]);
 
-    console.log('parks seeded');
+    console.log('Parkings seeded');
 
     await User.deleteMany();
 
@@ -79,7 +79,7 @@ db.once('open', async () => {
         }
     ]);
 
-    console.log('parks seeded');
+    console.log('parkings seeded');
 
     process.exit();
 })
