@@ -48,7 +48,7 @@ const Map = ({zipcode, setZipcode, selected, setSelected}) => {
 const [markers, setMarkers] = useState([]);
     
 
-    const {loading, data, refetch} = useQuery(QUERY_PARKINGS, {variables: {zipcode}})
+    const {loading, data, refetch} = useQuery(QUERY_PARKING, {variables: {zipcode}})
 
     useEffect(() => {
         
@@ -233,3 +233,5 @@ function Search({ panTo }) {
 }
 
 }
+
+export default Map;

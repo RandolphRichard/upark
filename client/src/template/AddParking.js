@@ -10,7 +10,7 @@ const AddParking = ({setZipcode, zipcode}) => {
 
 const [createNewParking, {error}] = useMutation(ADD_PARKING)
 
-const [address, setAddress] = useState('')
+// const [address, setAddress] = useState('')
 
 const history = useHistory();
 

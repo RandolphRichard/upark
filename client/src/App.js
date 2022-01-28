@@ -3,6 +3,7 @@ import { setContext } from '@apollo/client/link/context';
 import "./App.css";
 import Navbar from "./template/Navbar";
 import Landing from "./template/Landing";
+// import Sample from "./template/Sample";
 import Footer from "./template/Footer";
 import Signup from "./template/Signup";
 import Login from "./template/Login";
@@ -48,6 +49,15 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+// const Home = () => {
+//   <div className="App">
+//     <Navbar />
+//     <Landing />
+//     <Sample />
+//     <Footer />
+//   </div>;
+// };
+
 function App() {
 
   const [zipcode, setZipcode] = useState('90027')
@@ -86,6 +96,7 @@ function App() {
           <Route path="*" component={Home} />
         </Switch>
         </div>
+        {/* <Sample /> */}
         <Footer />
         </div>
       </Router>
@@ -94,30 +105,3 @@ function App() {
 }
 
 export default App;
-
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
-
-export default App;
-
