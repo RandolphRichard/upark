@@ -167,6 +167,69 @@ function Locate({ panTo }) {
     
 }
 
-//search a oarking
+//search a parking
+
+function Search({ panTo }) {
+    
+    const { ready, 
+            value, 
+            suggestions: { status, data }, 
+            setValue, 
+            clearSuggestions 
+        } = usePlacesAutocomplete({
+        requestOptions: {
+            location: {
+                lat: () => 34.0522,
+                lng: () => -118.2437
+            },
+            radius: 200 * 1000,
+        },
+    });
+
+    return (
+    
+    <Combobox onSelect={async (address) => {
+        setValue(address, false)
+        clearSuggestions();
+
+        try {
+            const results = await getGeocode({address});
+            const zip = await getZipCode(results[0], false)
+            if (zip) {
+         
+            setZipcode(zip)
+            refetch({zipcode: zip})
+            const { lat, lng } = await getLatLng(results[0])
+           
+            panTo({lat, lng})
+            }
+
+           
+        } catch(error) {
+            console.log('Error!')
+        }
+
+        }}>
+        <ComboboxInput 
+            value={value} 
+            className="form-control form-control-lg"
+            onChange={(e) => {
+                setValue(e.target.value)
+                }}
+            disabled={!ready}
+            placeholder="Please enter an address."
+        >
+
+        </ComboboxInput>
+        <ComboboxPopover>
+            <ComboboxList>
+            {status === "OK" && data.map(({id, description}) => 
+            <ComboboxOption key={id} value={description}/> )}
+            </ComboboxList>
+        </ComboboxPopover>
+    </Combobox>
+
+    )
+}
 
 }
