@@ -22,7 +22,6 @@
   "dependencies": {
     "apollo-link": "^1.2.14",
     "apollo-link-error": "^1.1.13",
-    "concurrently": "^6.3.0",
     "dotenv": "^14.3.2",
     "react-dotenv": "^0.1.3"
   },

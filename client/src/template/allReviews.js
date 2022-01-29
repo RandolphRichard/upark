@@ -21,7 +21,7 @@ const DisplayReview = () => {
     return(
         <div>
             <h1>
-                Parking Reviews
+                Parking Addresses
             </h1>
 
             {parkings.map(parking => {

@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-export const QUERY_PARKING = gql`
+export const QUERY_PARKINGS = gql`
   query getParkings($zipcode: String!) {
     parkingsByZip(zipcode: $zipcode) {
       _id

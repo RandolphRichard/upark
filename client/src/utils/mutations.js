@@ -10,6 +10,7 @@ export const LOGIN = gql`
     }
   }
 `;
+
 export const ADDREVIEW = gql`
   mutation addReview($overallRating: String!, $coordinates: String!, $handicapAccessible: String!, $parkingSpot: String!, $keys: String!, $comment: String!) {
     addReview(overallRating: $overallRating, coordinates: $coordinates, handicapAccessible: $handicapAccessible, parkingSpot: $parkingSpot, keys: $keys, comment: $comment) {

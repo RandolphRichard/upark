@@ -21,7 +21,7 @@ import {
     ComboboxOption
 } from "@reach/combobox";
 import {  useQuery } from '@apollo/client';
-import { QUERY_PARKING } from '../utils/queries';
+import { QUERY_PARKINGS } from '../utils/queries';
 import '@reach/combobox/styles.css'
 
 const libraries = ['places']
@@ -48,7 +48,7 @@ const Map = ({zipcode, setZipcode, selected, setSelected}) => {
 const [markers, setMarkers] = useState([]);
     
 
-    const {loading, data, refetch} = useQuery(QUERY_PARKING, {variables: {zipcode}})
+const {loading, data, refetch} = useQuery(QUERY_PARKINGS, {variables: {zipcode}})
 
     useEffect(() => {
         
@@ -57,6 +57,7 @@ const [markers, setMarkers] = useState([]);
             setMarkers([])
             const {parkingsByZip} = data
             console.log(parkingsByZip)
+            // eslint-disable-next-line
             parkingsByZip.map((datum) => {
               const lng = parseFloat(datum.lng)
                 const lat = parseFloat(datum.lat)
@@ -119,7 +120,7 @@ const [markers, setMarkers] = useState([]);
 
                 {selected ? (<InfoWindow position={{ lat: selected.lat, lng: selected.lng }} onCloseClick={() => { setSelected(null) }}>
                     <div>
-                        <h2>parking</h2>
+                        <h2>Parking</h2>
                         <h3>{selected.address}</h3>
                         <div>
                         <Link to="/specificReviews">View Reviews!</Link>
@@ -189,7 +190,11 @@ function Search({ panTo }) {
     return (
     
     <Combobox onSelect={async (address) => {
+
+
         setValue(address, false)
+
+
         clearSuggestions();
 
         try {

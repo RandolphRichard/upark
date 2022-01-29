@@ -26,7 +26,7 @@ const SpecificReviews = ({selected}) => {
     return(
         <div>
             <h1>
-                parking Reviews
+                Parking Reviews
             </h1>
                     <div>
                         <h3>Address: {parking.address}</h3>

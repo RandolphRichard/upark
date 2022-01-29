@@ -12,7 +12,7 @@ db.once('open', async () => {
         {zipcode: 'k1v-8v7', address: "2851-baycrest-dr ottawa", coordinates: '-45.378712X-75.650355', lat: '-45.378712', lng: '-75.650355'}
     ]);
 
-    console.log('Parkings seeded');
+    console.log('parkings seeded');
 
     await User.deleteMany();
 
@@ -41,7 +41,6 @@ db.once('open', async () => {
             username: 'tesfu',
             overallRating: 4,
             coordinates: '678X678',
-            
             handicapAccessible: true,
             parkingSpot: true,
             keys: false,
@@ -51,7 +50,6 @@ db.once('open', async () => {
             username: 'abebe',
             overallRating: 1,
             coordinates: '9723X2309',
-           
             handicapAccessible: true,
             parkingSpot: true,
             keys: false,
@@ -61,7 +59,6 @@ db.once('open', async () => {
             username: 'tesfu',
             overallRating: 3,
             coordinates: '1289X09324',
-            
             handicapAccessible: true,
             parkingSpot: false,
             keys: true,
@@ -71,7 +68,6 @@ db.once('open', async () => {
             username: 'abebe',
             overallRating: 1,
             coordinates: '1209X230990',
-            
             handicapAccessible: true,
             parkingSpot: false,
             keys: false,
