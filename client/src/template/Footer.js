@@ -7,7 +7,7 @@ const Footer = () => {
         <div className="row">
           <div className="col-lg-6 h-100 text-center text-lg-start my-auto">
             <p className="text-muted small mb-4 mb-lg-0">
-              &copy; Parking SOS 2022 All Rights Reserved.
+              &copy; Upark 2022 All Rights Reserved.
             </p>
           </div>
         </div>

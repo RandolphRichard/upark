@@ -17,7 +17,7 @@ const Navbar = () => {
             src="https://img.icons8.com/emoji/48/000000/p-button-emoji.png"
             alt="logo"
           />{" "}
-          Parking SOS
+          Upark
         </a>
         <button
           class="navbar-toggler"

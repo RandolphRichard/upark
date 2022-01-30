@@ -21,7 +21,7 @@ import {
     ComboboxOption
 } from "@reach/combobox";
 import {  useQuery } from '@apollo/client';
-import { QUERY_PARKINGS } from '../utils/queries';
+import { QUERY_ALL_PARKINGS } from '../utils/queries';
 import '@reach/combobox/styles.css'
 
 const libraries = ['places']
@@ -37,28 +37,34 @@ const options = {
 }
 
 const center = {
-    lat: 34.0522,
-    lng: -118.2437
+    lat: 45.424721,
+    lng: -75.695000
 }
 
 const Map = ({zipcode, setZipcode, selected, setSelected}) => {
 
 //loading google map using useEffect
 
+
 const [markers, setMarkers] = useState([]);
+
+
+const [inputAddress, setInputAdress] = useState();
     
 
-const {loading, data, refetch} = useQuery(QUERY_PARKINGS, {variables: {zipcode}})
+const {loading, data, refetch} = useQuery(QUERY_ALL_PARKINGS, {variables: {zipcode}})
+
+const parkings = data?.parkings || [];
 
     useEffect(() => {
         
    
         if (data) {
             setMarkers([])
-            const {parkingsByZip} = data
-            console.log(parkingsByZip)
+            // const {parkingsByZip} = data
+            // console.log(parkings)
             // eslint-disable-next-line
-            parkingsByZip.map((datum) => {
+            parkings.map((datum) => {
               const lng = parseFloat(datum.lng)
                 const lat = parseFloat(datum.lat)
                 setMarkers((current) => [
@@ -71,6 +77,7 @@ const {loading, data, refetch} = useQuery(QUERY_PARKINGS, {variables: {zipcode}}
                 ])
             })
         } 
+        // eslint-disable-next-line
     }, [data, loading])
  
 
@@ -97,6 +104,7 @@ const {loading, data, refetch} = useQuery(QUERY_PARKINGS, {variables: {zipcode}}
     return (
         <div>
             <Search panTo={panTo} />
+            <SearchButton panTo={panTo} />
             <Locate panTo={panTo}/>
             <GoogleMap mapContainerStyle={mapContainerStyle} zoom={8} center={center} options={options} onLoad={onMapLoad}>
 
@@ -140,8 +148,6 @@ function Locate({ panTo }) {
     return <button className="locate" onClick={() => {
         navigator.geolocation.getCurrentPosition(
             (position) => {
-
-           
             
             fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=${env.GOOGLE_MAPS_API_KEY}`).then((response) => {
                 
@@ -163,16 +169,66 @@ function Locate({ panTo }) {
         }, () => null)
     }} 
     >
-        <img src="/arrow.svg" alt="compass - locate me"/>
+        <img src="/location.svg" width={42} alt="compass - locate me"/>
     </button>
     
 }
+
+function SearchButton({ panTo }) {
+    return <button className="locate" onClick={() => {
+        // navigator.geolocation.getCurrentPosition(
+        //     (position) => {
+// 40.7128° N, 74.0060° W
+        // let position  = {
+        //     coords: {
+        //         latitude : -45.378712,
+        //         longitude :  -75.650355
+        //     }
+        //     // -X
+        // }
+
+    //    1355 Bank Street, Ottawa, ON
+            
+            // fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=${env.GOOGLE_MAPS_API_KEY}`).then((response) => {
+                // http://maps.google.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA
+            // fetch(`http://open.mapquestapi.com/geocoding/v1/${addressInput}`).then((response) => {
+            fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${inputAddress}&key=${env.GOOGLE_MAPS_API_KEY}`).then((response) => {
+                
+            if (response.ok) {
+                response.json().then((data) => {
+                    console.log(data)
+                    const zip = data.results[0].address_components[6].long_name
+                    setZipcode(zip);
+                    refetch({zipcode: zip})
+
+
+                panTo({
+                    lat: data.results[0].geometry.location.lat,
+                    lng: data.results[0].geometry.location.lng
+                });
+                });
+
+                
+            }
+            
+            
+            })
+        // }, () => null)
+    }} 
+    >
+        <img src="/arrow.svg" width={30} alt="compass - locate me"/>
+        {/* Search */}
+    </button>
+    
+}
+
 
 //search a parking
 
 function Search({ panTo }) {
     
     const { ready, 
+        // eslint-disable-next-line
             value, 
             suggestions: { status, data }, 
             setValue, 
@@ -216,10 +272,10 @@ function Search({ panTo }) {
 
         }}>
         <ComboboxInput 
-            value={value} 
+            value={inputAddress} 
             className="form-control form-control-lg"
             onChange={(e) => {
-                setValue(e.target.value)
+                setInputAdress(e.target.value)
                 }}
             disabled={!ready}
             placeholder="Please enter an address."
