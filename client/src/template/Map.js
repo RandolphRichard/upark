@@ -60,6 +60,8 @@ const parkings = data?.parkings || [];
         
    
         if (data) {
+            console.log(parkings)
+            localStorage.setItem("parking",JSON.stringify(parkings))
             setMarkers([])
             // const {parkingsByZip} = data
             // console.log(parkings)
@@ -106,8 +108,9 @@ const parkings = data?.parkings || [];
             <Search panTo={panTo} />
             <SearchButton panTo={panTo} />
             <Locate panTo={panTo}/>
-            <GoogleMap mapContainerStyle={mapContainerStyle} zoom={8} center={center} options={options} onLoad={onMapLoad}>
+            <GoogleMap mapContainerStyle={mapContainerStyle} zoom={11} center={center} options={options} onLoad={onMapLoad}>
 
+                {console.log(markers)}
                 {markers.map((marker) => (
                     <Marker
                         key={marker.address}

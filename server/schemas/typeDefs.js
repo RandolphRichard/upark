@@ -45,6 +45,8 @@ const typeDefs = gql`
         reviewsByParking(coordinates: String!): Parking
     }
     type Mutation {
+        createNewAddress(zipcode: String!, address: String!, coordinates: String!, lat: String!, lng: String! keys: String!, comment: String!): Parking
+        editAddress(_id: String!, zipcode: String!, address: String!, coordinates: String!, lat: String!, lng: String! keys: String!, comment: String!): Parking
         addUser(firstName: String!, lastName: String!, email: String!, username: String!, password: String!): Auth
         updateUser(firstName: String, lastName: String, email: String, username: String): User
         updatePassword(password: String!): User

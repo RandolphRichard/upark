@@ -36,10 +36,18 @@ const Navbar = () => {
               <>
                 <li className="nav-item mx-0 mx-lg-1">
                   <Link
+                    to="/AddAddress"
+                    className="nav-link py-3 px-0 px-lg-3 rounded text-danger border"
+                  >
+                    + Add Address
+                  </Link>
+                </li>
+                <li className="nav-item mx-0 mx-lg-1">
+                  <Link
                     to="/AddParking"
                     className="nav-link py-3 px-0 px-lg-3 rounded text-danger border"
                   >
-                    + Add New Parking address
+                    + Add a Review
                   </Link>
                 </li>
                 <li className="nav-item mx-0 mx-lg-1">

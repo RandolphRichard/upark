@@ -17,6 +17,7 @@ import DisplayReview from "./template/allReviews";
 import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import SpecificReviews from "./template/SpecificReviews";
 import AddParking from "./template/AddParking";
+import AddAddress from "./template/AddAddress";
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
@@ -92,6 +93,12 @@ function App() {
           </Route>
           <Route exact path="/addParking">
             <AddParking zicpode={zipcode} setZipcode={setZipcode} />
+          </Route>
+          <Route exact path="/addAddress">
+            <AddAddress/>
+          </Route>
+          <Route exact path="/editaddress">
+            <AddAddress />
           </Route>
           <Route path="*" component={Home} />
         </Switch>

@@ -138,6 +138,21 @@ const resolvers = {
         }
         throw new AuthenticationError('You need to be logged in')
     },
+    createNewAddress: async (parent, args, context) => { 
+        if (context.user) {
+            const parking = await Parking.create(args)
+            return parking   
+        }   
+        throw new AuthenticationError('You need to be logged in')
+    },
+    editAddress: async (parent, args, context) => { 
+        if (context.user) {
+            const parking = await Parking.findByIdAndUpdate(args._id,args)
+            return parking   
+        }   
+        throw new AuthenticationError('You need to be logged in')
+    },
+
     createNewParking: async (parent, args, context) => {
 
         const {zipcode, address, coordinates, lng, lat, overallRating, handicapAccessible, parkingSpot, keys, comment} = args

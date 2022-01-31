@@ -32,6 +32,23 @@ export const ADD_PARKING = gql`
     }
   }
 `
+export const ADD_ADDRESS = gql`
+  mutation createNewAddress($zipcode: String!, $address: String!, $coordinates: String!, $lat: String!, $lng: String! $keys: String!, $comment: String!) {
+    createNewAddress(zipcode: $zipcode, address: $address, coordinates: $coordinates, lat: $lat, lng: $lng,  keys: $keys, comment: $comment) {
+      address
+      zipcode
+    }
+  }
+`
+
+export const EDIT_ADDRESS = gql`
+  mutation editAddress($_id: String!, $zipcode: String!, $address: String!, $coordinates: String!, $lat: String!, $lng: String! $keys: String!, $comment: String!) {
+    editAddress(_id: $_id, zipcode: $zipcode, address: $address, coordinates: $coordinates, lat: $lat, lng: $lng,  keys: $keys, comment: $comment) {
+      address
+      zipcode
+    }
+  }
+`
 
 export const ADD_USER = gql`
   mutation addUser($firstName: String!, $lastName: String!, $username: String!, $email: String!, $password: String!) {

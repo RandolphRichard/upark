@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+// eslint-disable-next-line
+import React, { useEffect, useState } from 'react';
 import {  Form, FormGroup, Label, Input, Button} from 'reactstrap'
 import { ADDREVIEW } from '../utils/mutations'
 import { useMutation } from '@apollo/client';
@@ -30,6 +31,17 @@ const history = useHistory();
             });
         };
      
+//         useEffect(()=>{
+//             const searchParams = window.location.search.substring(1)
+//             const addressId = searchParams.split("=")[1]
+//             console.log(addressId)
+//             const savedParking = JSON.parse(localStorage.getItem("parking"))|| []
+//             if (savedParking.length){
+// const selectedParking = savedParking.filter(spot => spot._id==addressId)
+// console.log(selectedParking)
+
+//             }
+//         },[])
 
     const handleFormSubmit = async event => {
 
